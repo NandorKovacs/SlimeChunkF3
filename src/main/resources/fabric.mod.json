@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "slimechunkf3",
+  "version": "${version}",
+  "name": "SlimeChunkF3",
+  "description": "This mod modifies the f3 hud, so that under the chunk coordinates there is a boolean that tells you if you are in a slime chunk or not",
+  "authors": [
+    "Roaringmind22"
+  ],
+  "contributors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/slimechunkf3/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.roaringmind.slimechunkf3.SlimeChunkF3"
+    ],
+    "client": [],
+    "server": []
+  },
+  "mixins": [
+    "slimechunkf3.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*"
+  }
+}
