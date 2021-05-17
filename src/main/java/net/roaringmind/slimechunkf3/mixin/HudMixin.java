@@ -13,6 +13,7 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.DebugHud;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.World;
@@ -33,15 +34,11 @@ public class HudMixin extends DrawableHelper {
     boolean isSlimeChunk = false;
 
     if (world instanceof StructureWorldAccess) {
-      StructureWorldAccess stra = (StructureWorldAccess) world;
-      boolean chunkRandom = ChunkRandom
-          .getSlimeRandom(worldChunk.getPos().x, worldChunk.getPos().z, stra.getSeed(), 987234911L).nextInt(10) == 0;
-
-      if (chunkRandom && world.random.nextInt(10) == 0) {
-        isSlimeChunk = true;
-      }
+      ChunkPos chunkPos = worldChunk.getPos();
+      isSlimeChunk = ChunkRandom
+          .getSlimeRandom(chunkPos.x, chunkPos.z, ((StructureWorldAccess) world).getSeed(), 987234911L)
+          .nextInt(10) == 0;
     }
-
     list.add(String.format("Slime Chunk: %s", String.valueOf(isSlimeChunk)));
   }
 }
