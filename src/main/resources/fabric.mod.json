@@ -16,14 +16,20 @@
     "main": [
       "net.roaringmind.slimechunkf3.SlimeChunkF3"
     ],
-    "client": [],
-    "server": []
+    "client": [
+      "net.roaringmind.slimechunkf3.ClientSlimeChunkF3"
+    ],
+    "server": [
+      "net.roaringmind.slimechunkf3.ServerSlimeChunkF3"
+    ]
   },
   "mixins": [
     "slimechunkf3.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.11.3",
-    "fabric": "*"
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
   }
 }

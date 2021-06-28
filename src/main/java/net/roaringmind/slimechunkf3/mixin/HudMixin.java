@@ -19,6 +19,7 @@ import net.minecraft.world.StructureWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.WorldChunk;
 import net.minecraft.world.gen.ChunkRandom;
+import net.roaringmind.slimechunkf3.ClientSlimeChunkF3;
 
 @Mixin(DebugHud.class)
 public class HudMixin extends DrawableHelper {
@@ -31,14 +32,22 @@ public class HudMixin extends DrawableHelper {
   protected void setCustomDebugLine(CallbackInfoReturnable<List> cir, String string2, BlockPos blockPos, Entity entity,
       Direction direction, String string7, World world, LongSet longSet, List list, WorldChunk worldChunk, int i, int j,
       int k) {
-    boolean isSlimeChunk = false;
+
+    Long seed = null;
 
     if (world instanceof StructureWorldAccess) {
-      ChunkPos chunkPos = worldChunk.getPos();
-      isSlimeChunk = ChunkRandom
-          .getSlimeRandom(chunkPos.x, chunkPos.z, ((StructureWorldAccess) world).getSeed(), 987234911L)
-          .nextInt(10) == 0;
+      seed = ((StructureWorldAccess) world).getSeed();
+    } else {
+      seed = ClientSlimeChunkF3.seed;
     }
-    list.add(String.format("Slime Chunk: %s", String.valueOf(isSlimeChunk)));
+
+    String message = "cant access seed";
+
+    if (seed != null) {
+      ChunkPos chunkPos = worldChunk.getPos();
+      message = String.valueOf(ChunkRandom.getSlimeRandom(chunkPos.x, chunkPos.z, seed, 987234911L).nextInt(10) == 0);
+    }
+
+    list.add(String.format("Slime Chunk: %s", message));
   }
 }
