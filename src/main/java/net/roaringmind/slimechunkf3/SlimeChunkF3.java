@@ -5,8 +5,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.lookup.v1.item.ItemApiLookup;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.Identifier;
 
 public class SlimeChunkF3 implements ModInitializer {
